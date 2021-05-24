@@ -15,7 +15,7 @@ var isValid = function (s) {
   const close = Object.values(temp);
 
   // 첫번째 값이 닫는 괄호이거나 배열의 길이가 홀수이면 false를 반환한다
-  if (close.includes(arr[0]) || arr.length % 2 !== 0) {
+  if (arr.length % 2 !== 0) {
     return false;
   }
   for (let i of arr) {
