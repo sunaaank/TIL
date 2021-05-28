@@ -1,0 +1,21 @@
+# 코어자바스크립트 2장 복습용 질문리스트
+
+- 실행 컨텍스트란?
+- 실행 컨텍스트가 활성화 되는 시점에 하는 3가지 동작
+- 스택과 큐의 차이
+- variableEnvironment, lexicalEnvironment가 뭔지와 차이
+- variableEnvironment과 lexicalEnvironment가 수집하는 정보 2가지
+- environmentRecord와 호이스팅
+    - environmentRecord가 변수 정보를 수집하면서 실행되는게 호이스팅
+- 호이스팅 규칙
+- 함수 선언문과 함수 표현식 차이 (호이스팅도 같이 설명할 수 있어야함)
+- 함수 선언문, 익명 함수 표현식, 기명 함수 표현식 어떻게 쓰는지
+- 함수 선언문으로 할 경우 어떤 문제점이 발생하는지
+- 스코프, 스코프 체인이 무엇인지
+- ES5와 ES6이후의 스코프 차이
+- 스코프 체인을 가능하게 하는 수집 자료
+- outerEnvironmentReference가 lexicalEnvironment를 참조하는 순간
+- p.54 코드 4번째줄 `console.log(a)` 가 undefined 인 이유
+- p.54 코드에서 전역변수와 지역변수가 무엇인지
+- p.54 코드를 p.57의 표로 설명
+- 호이스팅을 변수 선언, 값 할당, 함수 선언문, 함수 표현식을 넣어서 설명해보기 (p.64)
