@@ -170,12 +170,12 @@ list.next.next.next.next = null;
 
 
 ## 과제
-1. 주어진 숫자까지의 모든 숫자 더하기
+### 1. 주어진 숫자까지의 모든 숫자 더하기
 - 숫자 1 + 2 + ... + n을 계산하는 함수 sumTo (n)을 만들어보세요.
 - 더 생각해보기 1: 세 가지 방법 중 어떤 방법이 가장 빠른가요? 어떤 방법이 가장 느린가요? 이유도 함께 제시해주세요.
 - 더 생각해보기 2: 재귀를 사용해 sumTo (100000)를 계산할 수 있을까요?
 
-1) for문 사용하기
+#### 1) for문 사용하기
 ```js
 function sumTo(n) {
   let result = 0;
@@ -188,7 +188,7 @@ function sumTo(n) {
 console.log( sumTo(100) ); 
 ```
 
-2) 재귀 사용하기
+#### 2) 재귀 사용하기
 ```js
 function sumTo(n) {
   if(n == 1){
@@ -199,7 +199,7 @@ function sumTo(n) {
 }
 ```
 
-3) 등차수열 공식 이용하기
+#### 3) 등차수열 공식 이용하기
 ```js
 function sumTo(n) {
   return n * (n+1)/2
@@ -213,10 +213,153 @@ console.log( sumTo(100) );
 => 몇몇 자바스크립트 엔진은 'tail call' 최적화를 지원함. 자바스크립트 엔진이 tail call 최적화를 지원하지 않는다면, 엔진에 설정된 스택 사이즈 제한을 넘었기 때문에 최대 스택 사이즈 초과 에러가 발생함.
 
 
-2. 팩토리얼 계산하기
+### 2. 팩토리얼 계산하기
 - 팩토리얼(factorial)은 n이 자연수일 때, 1부터 n까지의 모든 자연수의 곱을 의미합니다. n 팩토리얼은 n!으로 표시합니다.
 - 재귀를 사용하여 n!을 계산하는 함수, factorial(n)을 만들어보세요.
+```js
+function factorial(n) {
+    return (n != 1) ? n * factorial(n-1) : 1;
+}
 
-3. 피보나치 수 계산하기
+console.log( factorial(5) );
+```
+
+### 3. 피보나치 수 계산하기
 - 피보나치 수는 첫째와 둘째 항이 1이며 그 뒤의 모든 항은 바로 앞 두 항의 합인 수열로, Fn = Fn-1 + Fn-2라는 공식으로 표현할 수 있습니다.
 - n 번째 피보나치 수를 반환하는 함수 fib(n)을 작성해보세요.
+- 주의: fib (77)를 호출했을 때 연산 시간이 1초 이상 되면 안 됩니다.
+
+#### 1) 재귀로 구현하기
+```js
+function fib(n) {
+  if( n == 1 || n == 2) {
+    return 1
+  } else {
+    return fib(2n-3)
+  }
+}
+```
+- 재귀를 사용해 구현하면 n이 커질 경우 속도가 느려짐. fib(77)을 호출하면 CPU 리소스를 다 잡아먹어서 잠시 엔진이 멈출 수도 있음.
+- 연산 속도가 느려지는 이유는 함수 호출 도중에 수많은 서브 호출이 일어나기 때문. 같은 값들이 여러 번 평가되면서 이런 일이 발생함.
+=> 최적화 방법 : 이미 평가된 값을 어딘가에 저장해놓는 방식. ex) fib(3) 계산이 끝나면 이 결과를 어딘가에 저장해 놓았다가 같은 값이 필요할 때 저장된 값을 불러오는 식
+
+#### 2) 반복문으로 구현하기 ( buttom-up 다이내믹 프로그래밍(동적계획법) )
+```js
+function fib(n) {
+  let a = 1, b = 1;
+  for (let i = 3; i <= n; i++) {
+    let c = a + b;
+    a = b;
+    b = c;
+  }
+  return b
+}
+```
+- 이렇게 하면 재귀를 사용하는 방법보다 연산 속도도 빠르고 중복되는 계산도 없다는 장점이 있음.
+
+### 4. 단일 연결 리스트 출력하기
+- 리스트 내 항목을 차례대로 하나씩 출력해주는 함수 printList(list)를 만들어보세요.
+- 반복문과 재귀를 사용한 답안을 각각 만들어봅시다.
+- 그리고 재귀를 사용한 것과 재귀를 사용하지 않은 것 중 어떤 게 더 좋은 코드인지 생각해봅시다.
+
+#### 1) 반복문으로 구현하기
+```js
+let list = {
+  value: 1,
+  next: {
+    value: 2,
+    next: {
+      value: 3,
+      next: {
+        value: 4,
+        next: null
+      }
+    }
+  }
+};
+
+function printList(list) {
+
+  while(list) {
+    alert(list.value);
+    list = list.next;
+  }
+
+}
+```
+- 매개변수 `list`를 바로 사용하는 건 현명한 선택이 아님.
+- 나중에 함수를 확장할 때 `list`를 가지고 뭔가 해야 하는 경우가 생길 수 있음. while문 앞에서 `list`각 변경되면 코드가 다르게 작동함.
+- 리스트를 리스트를 순회하기 위한 용도로, 임시변수 `tmp`에 저장하는 것이 좋음.
+
+```js
+function printList(list){
+  let tmp  = list;
+  
+  while(tmp) {
+    console.log(tmp.value);
+    tmp = tmp.next;
+  }
+  
+}
+
+printList(list)
+```
+
+#### 2) 재귀로 구현하기
+```js
+function printList(list){
+  console.log(list.value)
+  if(list.next){
+    printList(list.next)
+  }
+}
+
+printList(list)
+```
+
+#### 두 방법 비교하기
+1) 반복문을 사용하면 리소스를 좀 더 효율적으로 사용함.
+- 두 방법의 반환 값은 같지만, 반복문을 사용한 방법에선 중첩 함수를 호출하는데 추가적인 리소스를 쓰지 않기 때문.
+2) 재귀를 사용한 방법은 코드 길이가 짧고 이해하기 쉽다는 장점이 있음.
+
+
+### 5. 단일 연결 리스트 역순으로 출력하기
+
+#### 1) 재귀로 구현하기
+```js
+function printList(list){
+  if(list.next){
+  printList(list.next)
+  }
+  console.log(list.value)
+}
+
+printList(list)
+```
+
+#### 2) 반복문으로 구현하기
+- `list`의 마지막 값을 바로 구할 수 있는 방법이 없음. 마지막 값을 시작으로 '역행'할 수 없음.
+- 원래 순서대로 요소들을 하나씩 거슬러 올라가면서 각 요소를 배열에 저장해놓고, 마지막 요소에 도달했을 때, 배열에 저장된 요소들을 거꾸로 출력하는 방법을 사용할 수 있음.
+
+```js
+function printList(list){
+  let tmp  = list;
+  let result = [];
+  
+  while(tmp) {
+    result.push(tmp.value);
+    tmp = tmp.next;
+  }
+  
+  for (let i = result.length-1; i>=0; i--) {
+    console.log(result[i]);
+  }
+  
+}
+
+printList(list)
+```
+
+#### 두 방법 비교
+- 재귀를 사용한 방법과 반복문을 사용한 방법이 완전히 동일한 접근 방식을 취했음.
+- 재귀를 사용한 방법에서도 리스트를 앞에서부터 따라가면서 각 요소를 실행 컨텍스트 스택에 저장해 놓았다가 스택 맨 위에서부터 요소를 차례대로 출력하였음.
