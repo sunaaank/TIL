@@ -139,4 +139,7 @@ reversedStr(splitedStr)
 // result : 'boy a got i'
 ```
 
+* `split(" ")`과 `reverse() + join(" ")`을 직접 만들어보기 위해 위와 같은 코드가 된 것이다. 
+* `splitStr` 함수의 else문에 `array.push(word)`를 추가한 이후 `array.push(" ")` 공백을 추가해 stack으로 처리해주면 `reversedStr` 함수에서 문자 사이의 공백처리를 따로 해주지 않아도 된다.
+
 결론 : 메소드는 효율성을 높여주는 매우 소중한 친구다✨
