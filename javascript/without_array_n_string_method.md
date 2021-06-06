@@ -92,12 +92,12 @@ function reversedStr(arr) {
 
 ```js
 const reversedStr = arr => {
-  let newStr = ""
+  let newStr = "";
   for (let i=arr.length-1; i>0; i--) {
-    newStr += (arr[i] + " ")
+    newStr += arr.pop() + " "
   }
-  newStr += arr[0]
-return newStr
+  newStr += arr.pop()
+return newStr;
 }
 ```
 
@@ -130,9 +130,9 @@ const splitedStr = splitStr("i got a boy");
 const reversedStr = arr => {
   let newStr = "";
   for (let i=arr.length-1; i>0; i--) {
-    newStr += (arr[i] + " ")
+    newStr += arr.pop() + " "
   }
-  newStr += arr[0]
+  newStr += arr.pop()
 return newStr;
 }
 reversedStr(splitedStr)
