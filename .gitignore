@@ -103,6 +103,9 @@ dist
 # TernJS port file
 .tern-port
 
+# dreamcoding_typescript files
+typescript/ellie_typescript
+
 # Etc.
 .DS_Store
 style.css.map
