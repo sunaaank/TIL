@@ -178,4 +178,21 @@ console.log(triangle instanceOf Object);
 
 ```
 
+
+# 객체지향 4원칙
+## Encapsulation(캡슐화)
+- 서로 관련있는 데이터와 함수를 한 오브젝트 안에 담아두고, 외부에서 볼 필요가 없는 데이터를 담아두고 캡슐화 하는 것
+- 어떤 데이터를 외부에서 볼 수 있고, 없게 할 지 설정하는 것
+
+## Abstraction(추상화)
+- 추상화를 통해서 외부에서는 내부에서 어떻게 구현되어 있는지, 얼마나 복잡한 지 신경쓰지 않고, 보이는 함수를 이용해서 간단히 오브젝트를 사용할 수 있음.
+
+## Inheritance(상속)
+- 상속을 통해 한 번 잘 정의해둔 클래스를 재사용해서 만들 수 있음.
+- 클래스는 `parent`, `super`, `base`, 인스턴스는 `child`, `sub`, `derived`라고 부름. 이 둘은 `IS-A`관계라고 부름.
+
+## Polymorphism(다형성)
+- 클래스에 정의된 함수를 다양한 인스턴스에서 호출해서 접근할 수 있음
+
+
 > [MDN 자바스크립트 참고자료](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference)
