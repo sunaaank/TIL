@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  body {
+    background-color: black;
+    /* overflow: hidden; */
+  }
+
+  .card {
+    width: 200px;
+    height: 100px;
+    background-color: orangered;
+    margin: 10px auto;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .card:hover {
+    background-color:green;
+  }
+
+  .special {
+    background-color: white;
+  }
+
+  aside {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+  }
+  
+</style>
+<body>
+  <aside>
+    <button id="scroll-by">Scroll by 100px</button>
+    <button id="scroll-to">Scroll to 100px</button>
+    <button id="scroll-into">Scroll into special</button>
+</aside>
+  <div class="card">client x,y</div>
+  <div class="card">page x,y</div>
+  <div class="card">client x,y</div>
+  <div class="card">page x,y</div>
+  <div class="card">client x,y</div>
+  <div class="card special">special</div>
+  <div class="card">client x,y</div>
+  <div class="card">page x,y</div>
+
+  <script>
+      const special = document.querySelector('.special');
+      const scrollTo = document.querySelector('#scroll-to')
+      const scrollBy = document.querySelector('#scroll-by')
+      const scrollInto = document.querySelector('#scroll-into')
+      scrollTo.addEventListener('click', (e)=> {
+        window.scrollTo(0, 100)
+      })
+      scrollBy.addEventListener('click', (e)=> {
+        window.scrollBy({left: 0, top:100, behavior: 'smooth'})
+      })
+      scrollInto.addEventListener('click', (e)=> {
+        special.scrollIntoView()
+      })
+
+      let card = document.querySelector('.card')
+      let rect = card.getBoundingClientRect();
+
+      function clickCard(e){
+        e.target.style.background = 'orange';
+        setTimeout(function() {
+          e.target.style.background = "";
+        },500)
+      }
+
+      // 🚩첫번째 card 클래스만 잡아오는데, 다른 것에도 적용 어떻게 시키지? 
+      card.addEventListener("mouseover", ((e) => {mouseOverCard(e)}))
+      
+      // 🚩 removeEventListener 언제 어떻게 쓰지? 마우스 치우면 이벤트 없어지게 하고싶어!
+      // card.removeEventListener("mouseover", mouseOverCard)
+
+      function mouseOverCard(e){
+        e.target.style.backgroundColor = "yellow";
+      }
+        
+
+    function update(e) {
+      console.log(`page: ${e.pageX}, ${e.pageY}`)
+      console.log(`client: ${e.clientX}, ${e.clientY}`)
+    }
+    window.addEventListener('click', (e) => {
+      update(e)
+      clickCard(e);
+    })
+    
+  </script>
+</body>
+</html>

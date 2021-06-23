@@ -34,8 +34,37 @@
 - Navigator : window에 관련된 오브젝트가 있음. 
 => 웹페이지를 브라우저에서 열게 되면, window에 DOM(document), BOM(브라우저 관련-navigator, location, fetch, storage...), JavaScript(Array, Map, Date...)가 있음.
 
+### Window
+1. size
+- `window.screen`: 모니터 사이즈
+- `window.outer`: 전체 브라우저 사이즈(탭 포함)
+- `window.inner`: 웹페이지(스크롤바 포함)
+- `documentElement. clientWidth`: 문서 자체(스크롤바를 제외한 영역 사이즈)
+2. scroll
+- `scrollTo(x,y)`: x,y px로 이동
+- `scrollBy(x,y)`: x,y px씩 이동
+- (x,y) 대신에 ({left:x, top:y, behavior:'smooth'})로 해서 부드럽게 스크롤되게 할 수 있음!
+- `Element.scrollIntoView()` : 특정 요소로 이동
+3. load
 
+### 브라우저 좌표
+- `Coordinates(좌표)`: 브라우저 화면 왼쪽 최상위가 (0, 0)
+- `Element.getBoundingClientRect()`: Element(DOM에 들어있는 모든 요소들) Object안에 들어있는 함수.
 
+- 💎 JS에서는 (CSS와는 달리) 브라우저 좌측최상단을 기준으로 항상 X축과 Y축으로부터 좌표가 계산이 됨
+- `top`: y좌표
+- `left`: x좌표
+- `bottom`: 오른쪽 하단 y좌표
+- `right`: 오른쪽 하단 x좌표
+
+#### 💥 주의: CSS 포지션 용어와는 컨셉이 다름
+- CSS에서 `bottom`은 브라우저에서 제일 밑에서부터 떨어져있는 거리
+- CSS에서 `right`은 브라우저에서 제일 오른쪽부터 떨어져있는 거리
+
+### Client x,y vs Page x,y
+- 사용자가 클릭을 하게 되면 이벤트가 발생함. 이벤트에는 client x,y가 들어있음.
+- client x,y : 브라우저 윈도우에서 이벤트 클릭 위치의 client x와 y가 얼마나 떨어져있는지 전달됨.
+- page x,y : 보이지 않는 문서 시작지점부터 x, y좌표가 계산됨.
 
 ### 참고자료
 
