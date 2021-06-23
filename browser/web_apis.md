@@ -40,14 +40,25 @@
 - `window.outer`: 전체 브라우저 사이즈(탭 포함)
 - `window.inner`: 웹페이지(스크롤바 포함)
 - `documentElement. clientWidth`: 문서 자체(스크롤바를 제외한 영역 사이즈)
+
 2. scroll
 - `scrollTo(x,y)`: x,y px로 이동
 - `scrollBy(x,y)`: x,y px씩 이동
 - (x,y) 대신에 ({left:x, top:y, behavior:'smooth'})로 해서 부드럽게 스크롤되게 할 수 있음!
+
 - `Element.scrollIntoView()` : 특정 요소로 이동
+> `scrollIntoView() 옵션`
+- `behavior` 전환 애니메이션 : `auto`(default), `smooth`
+- `block` 수직정렬 : `start`(default), `center`, `end`, `nearest`
+- `inline` 수평정렬 : `start`, `center`, `end`, `nearest`(default)
+
+- Element.scrollIntoView({behavior: smmoth, block: 'end', inline: "nearest"});
+> - 참고자료 : https://developer.mozilla.org/ko/docs/Web/API/Element/scrollIntoView
+
+
 3. load
 - `defer`(HEAD안에 script)옵션, `DOMContentLoaded` 이벤트 : HTML만 완료가 되면 호출이 됨.
-- 페이지 안에 리소스(css, images 등)가 많은 경우 `COMContentLoaded`가 빨리 호출 되고, `Load`이벤트는 조금 나중에 리소스가 다 준비완료되면 불려짐.
+- 페이지 안에 리소스(css, images 등)가 많은 경우 `DOMContentLoaded`가 빨리 호출 되고, `Load`이벤트는 조금 나중에 리소스가 다 준비완료되면 불려짐.
 - 이외에 `beforeunload`, `unload` 이벤트도 있음.
 
 ### 브라우저 좌표
