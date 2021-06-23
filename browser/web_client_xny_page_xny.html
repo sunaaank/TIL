@@ -22,7 +22,11 @@
   }
 
   .card:hover {
-    background-color:green;
+    background-color:yellow;
+  }
+
+  .selected {
+    background-color: green;
   }
 
   .special {
@@ -41,59 +45,61 @@
     <button id="scroll-by">Scroll by 100px</button>
     <button id="scroll-to">Scroll to 100px</button>
     <button id="scroll-into">Scroll into special</button>
-</aside>
-  <div class="card">client x,y</div>
-  <div class="card">page x,y</div>
-  <div class="card">client x,y</div>
-  <div class="card">page x,y</div>
-  <div class="card">client x,y</div>
-  <div class="card special">special</div>
-  <div class="card">client x,y</div>
-  <div class="card">page x,y</div>
+  </aside>
+  <section id="card-list">
+    <div class="card">client x,y</div>
+    <div class="card">page x,y</div>
+    <div class="card">client x,y</div>
+    <div class="card">page x,y</div>
+    <div class="card">client x,y</div>
+    <div class="card special">special</div>
+    <div class="card">client x,y</div>
+    <div class="card">page x,y</div>
+</section>
 
   <script>
-      const special = document.querySelector('.special');
-      const scrollTo = document.querySelector('#scroll-to')
-      const scrollBy = document.querySelector('#scroll-by')
-      const scrollInto = document.querySelector('#scroll-into')
-      scrollTo.addEventListener('click', (e)=> {
-        window.scrollTo(0, 100)
-      })
-      scrollBy.addEventListener('click', (e)=> {
-        window.scrollBy({left: 0, top:100, behavior: 'smooth'})
-      })
-      scrollInto.addEventListener('click', (e)=> {
-        special.scrollIntoView()
-      })
+    const special = document.querySelector('.special');
+    const scrollTo = document.querySelector('#scroll-to')
+    const scrollBy = document.querySelector('#scroll-by')
+    const scrollInto = document.querySelector('#scroll-into')
+    scrollTo.addEventListener('click', (e)=> {
+      window.scrollTo(0, 100)
+    })
+    scrollBy.addEventListener('click', (e)=> {
+      window.scrollBy({left: 0, top:100, behavior: 'smooth'})
+    })
+    scrollInto.addEventListener('click', (e)=> {
+      special.scrollIntoView()
+    })
 
-      let card = document.querySelector('.card')
-      let rect = card.getBoundingClientRect();
+    let card = document.querySelector('.card')
+    let rect = card.getBoundingClientRect();
 
-      function clickCard(e){
-        e.target.style.background = 'orange';
-        setTimeout(function() {
-          e.target.style.background = "";
-        },500)
+    function toggleSelect(div) {
+      div.classList.toggle('selected');
+    }
+
+    function singleSelect(div) {
+      const cardList = document.querySelector('#card-list')
+      let selected = cardList.querySelectorAll('.selected');
+      for(let elem of selected) {
+        elem.classList.remove('selected');
       }
-
-      // 🚩첫번째 card 클래스만 잡아오는데, 다른 것에도 적용 어떻게 시키지? 
-      card.addEventListener("mouseover", ((e) => {mouseOverCard(e)}))
-      
-      // 🚩 removeEventListener 언제 어떻게 쓰지? 마우스 치우면 이벤트 없어지게 하고싶어!
-      // card.removeEventListener("mouseover", mouseOverCard)
-
-      function mouseOverCard(e){
-        e.target.style.backgroundColor = "yellow";
-      }
-        
+      div.classList.add('selected');
+    }
 
     function update(e) {
       console.log(`page: ${e.pageX}, ${e.pageY}`)
       console.log(`client: ${e.clientX}, ${e.clientY}`)
     }
     window.addEventListener('click', (e) => {
+      if (e.target.tagName != "DIV") return;
       update(e)
-      clickCard(e);
+      if (e.ctrlKey || e.metaKey) {
+        toggleSelect(e.target);
+      } else {
+        singleSelect(e.target);
+      }
     })
     
   </script>

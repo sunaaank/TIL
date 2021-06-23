@@ -51,6 +51,7 @@
 - 이외에 `beforeunload`, `unload` 이벤트도 있음.
 
 ### 브라우저 좌표
+- 참고자료 : https://ko.javascript.info/coordinates
 - `Coordinates(좌표)`: 브라우저 화면 왼쪽 최상위가 (0, 0)
 - `Element.getBoundingClientRect()`: Element(DOM에 들어있는 모든 요소들) Object안에 들어있는 함수.
 
