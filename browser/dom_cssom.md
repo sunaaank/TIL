@@ -22,6 +22,16 @@
 - Node.isConnected() : 노드가 연결되어 있는지 확인
 - Node.nextSibiling() : 노드 옆 자식
 
+# CSSOM
+- CSS Object Model
+- DOM + CSS(external/embedded/inline/user-agent stylesheet) = CSSOM
+- 브라우저에서 적용하는 모든 속성값들 적용(computed styles based on CSS cascading rules)
+
+## Render Tree
+- DOM + CSSOM = Render Tree
+- html head 부분과 display:none 설정한 부분은 최종 랜더트리에 포함되지 않음
+- `visibility: hidden`은 렌더트리에 포함됨. `display: none`은 렌더트리에 포함되지 않음.
+
 
 ## 참고자료
 DOM
@@ -36,3 +46,5 @@ Node
 Event Target
 - https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
 
+CSSOM
+- https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model
