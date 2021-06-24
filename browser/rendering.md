@@ -24,4 +24,5 @@
 ## 참고자료
 
 - [CSS Triggers](http://csstriggers.com/)
+- [Chrome Developer Tool 퍼포먼스 측정](https://developer.chrome.com/docs/devtools/evaluate-performance/)
 - [[CSS] Reflow 원인과 마크업 최적화 Tip](https://zinee-world.tistory.com/295)
