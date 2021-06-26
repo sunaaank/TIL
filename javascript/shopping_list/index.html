@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Shopping App</title>
+  <link rel="stylesheet" href="styles.css"></link>
+  <link rel="stylesheet" href="reset.css"></link>
+</head>
+<body>
+  <article class="container">
+    <header class="header-box">
+      <h1 class="title">Shopping List</h1>
+    </header>
+    <div class="body-box">
+      <ul class="card-list">
+        <li class="card" id="card-1">
+          <p>리스트1</p>
+          <div class="btns">
+            <button class="like-card">🤍</button>
+            <button class="delete-card">❌</button>
+          </div>
+        </li>
+        <li class="card" id="card-2">
+          <p>리스트2</p>
+          <div class="btns">
+            <button class="like-card">💖</button>
+            <button class="delete-card">❌</button>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+    <form class="input-box" onsubmit="return false">
+      <input type="text" name="item" class="list-input" autocomplete="off" autofocus onkeyup="handleSubmit()">
+    </form>
+    <footer>
+      <button class="submit">+</button>
+    </footer>
+  </article>
+<script src="main.js"></script>
+</body>
+</html>
