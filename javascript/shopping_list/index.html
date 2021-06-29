@@ -5,40 +5,46 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Shopping App</title>
+  <script src="main.js" defer></script>
+  <script src="https://kit.fontawesome.com/9eb162ac0d.js"
+  crossorigin="anonymous"></script>
   <link rel="stylesheet" href="styles.css"></link>
   <link rel="stylesheet" href="reset.css"></link>
 </head>
 <body>
-  <article class="container">
-    <header class="header-box">
+  <section class="list">
+    <header class="header">
       <h1 class="title">Shopping List</h1>
     </header>
-    <div class="body-box">
-      <ul class="card-list">
+    <div class="cards-box">
+      <ul class="cards">
         <li class="card" id="card-1">
           <p>리스트1</p>
           <div class="btns">
-            <button class="like-card">🤍</button>
-            <button class="delete-card">❌</button>
+            <button class="like-card">🤍
+            </button>
+            <button class="delete-card">
+              <i class="fas fa-trash-alt"></i>
+            </button>
           </div>
         </li>
         <li class="card" id="card-2">
           <p>리스트2</p>
           <div class="btns">
             <button class="like-card">💖</button>
-            <button class="delete-card">❌</button>
+            <button class="delete-card">
+              <i class="fas fa-trash-alt"></i>
+            </button>
           </div>
         </li>
       </ul>
-
     </div>
-    <form class="input-box" onsubmit="return false">
-      <input type="text" name="item" class="list-input" autocomplete="off" autofocus onkeyup="handleSubmit()">
-    </form>
-    <footer>
-      <button class="submit">+</button>
+    <footer class="footer">
+      <input type="text" name="item" class="footer-input" autocomplete="off" autofocus onkeyup="handleSubmit()">
+      <button class="submit-btn">
+        <i class="fas fa-plus"></i>
+      </button>
     </footer>
-  </article>
-<script src="main.js"></script>
+  </section>
 </body>
 </html>
