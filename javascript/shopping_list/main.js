@@ -27,26 +27,20 @@ function onAdd() {
 }
 
 function createCard(text) {
+  let id = 0;
   const card = document.createElement('li')
   card.setAttribute('class', 'card')
-  const p = document.createElement('p')
-  p.innerText = text;
-  const btns = document.createElement('div')
-  btns.setAttribute('class', 'btns')
-  const likeBtn = document.createElement('button')
-  likeBtn.setAttribute('class', likeBtn) 
-  likeBtn.innerHTML = `💖`
-  const deleteBtn = document.createElement('button')
-  deleteBtn.setAttribute('class', deleteBtn) 
-  deleteBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`
-  deleteBtn.addEventListener('click', () => {
-    cards.removeChild(card)
-  })
-
-  card.appendChild(p)
-  card.appendChild(btns)
-  btns.appendChild(likeBtn)
-  btns.appendChild(deleteBtn)
+  card.setAttribute('data-id', id)
+  card.innerHTML = `
+          <p>${text}</p>
+          <div class="btns">
+            <button class="likeBtn" data-id=${id}>🤍
+            </button>
+            <button class="deleteBtn">
+              <i class="fas fa-trash-alt" data-id=${id}></i>
+            </button>
+          </div>`
+  id++;
   return card
 }
 
@@ -58,5 +52,13 @@ input.addEventListener('keypress', () => {
   if (window.event.keyCode == 13) {
     console.log("💥💥💥💥")
     onAdd()
+  }
+})
+
+cards.addEventListener('click', (event) => {
+  const id = event.target.dataset.id
+  if(id) {
+    const toBeDeleted = document.querySelector(`.card[data-id="${id}"]`)
+    toBeDeleted.remove();
   }
 })
