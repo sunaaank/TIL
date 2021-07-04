@@ -26,8 +26,8 @@ function onAdd() {
   input.focus();
 }
 
+let id = 0;
 function createCard(text) {
-  let id = 0;
   const card = document.createElement('li')
   card.setAttribute('class', 'card')
   card.setAttribute('data-id', id)
