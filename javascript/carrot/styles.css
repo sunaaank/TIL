@@ -62,17 +62,14 @@
 }
 
 .gamefield {
+  position: relative;
   width: 100%;
   height: 100%;
-
-  background-color: violet;
-  opacity: 0.8;
 }
 
 .gatcha {
   width: 50px;
   height: 50px;
-  display: flex;
   cursor: pointer;
 
 }
