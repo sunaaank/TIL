@@ -1,22 +1,20 @@
-body {
-  background-image: url(./img/background.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.info {
-  width: 100%;
-  height: 100vh;
+.game {
+  width: 800px;
+  height: 500px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+  margin: auto;
+  background: url(img/background.png) center/cover;
 }
 
 .playinfo {
+  width: 300px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 auto 40px;
+  padding: 20px;
 }
 
 .timer {
@@ -26,7 +24,7 @@ body {
   justify-content: center;
   align-items: center;
   margin-bottom: 8px;
-  border: 3px solid black;
+  border: 4px solid black;
   border-radius: 10px;
   background-color: white;
   font-size: 24px;
@@ -34,51 +32,41 @@ body {
 }
 
 .count {
-  width: 1.5em;
-  height: 1.5em;
+  width: 50px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid black;
+  border: 3px solid black;
   border-radius: 100%;
   background-color: rgb(248, 118, 118);
-  font-size: 30px;
+  font-size: 38px;
   color: white;
   text-align: center;
 }
 
-.timeover {
-  width: 18em;
-  height: 7em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(39, 34, 34, 0.7);
-  border-radius: 12px;
-}
-
-.restart {
-  display: block;
-  width: 1.8em;
-  height: 1.8em;
-  border: 2px solid black;
+.btn {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 8px;
+  border: 3px solid black;
   border-radius: 12px;
   background-color: rgb(255, 232, 182);
-  font-size: 30px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: transform 300ms ease-in;
 }
 
-.result {
-  font-size: 20px;
-  color: #fff;
+.btn:hover {
+  transform: scale(1.1);
 }
 
-.gatchas {
+.gamefield {
   width: 100%;
-  height: 50%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  height: 100%;
+
+  background-color: violet;
+  opacity: 0.8;
 }
 
 .gatcha {
@@ -91,4 +79,27 @@ body {
 
 .gatcha:hover {
   transform: scale(1.1);
+}
+
+.popup {
+  width: 400px;
+  height: 140px;
+  display:block;
+  margin: auto;
+  padding: 20px;
+  background-color: rgba(39, 34, 34, 0.7);
+  border-radius: 12px;
+  text-align: center;
+  transform: translateY(-150%);
+  z-index: 100;
+}
+
+.popup-hide {
+  display: none;
+}
+
+.message {
+  display: block;
+  font-size: 24px;
+  color: #fff;
 }
