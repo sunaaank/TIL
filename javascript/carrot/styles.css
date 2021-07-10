@@ -1,0 +1,94 @@
+body {
+  background-image: url(./img/background.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.info {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.playinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timer {
+  width: 8em;
+  height: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+  border: 3px solid black;
+  border-radius: 10px;
+  background-color: white;
+  font-size: 24px;
+  text-align: center;
+}
+
+.count {
+  width: 1.5em;
+  height: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black;
+  border-radius: 100%;
+  background-color: rgb(248, 118, 118);
+  font-size: 30px;
+  color: white;
+  text-align: center;
+}
+
+.timeover {
+  width: 18em;
+  height: 7em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(39, 34, 34, 0.7);
+  border-radius: 12px;
+}
+
+.restart {
+  display: block;
+  width: 1.8em;
+  height: 1.8em;
+  border: 2px solid black;
+  border-radius: 12px;
+  background-color: rgb(255, 232, 182);
+  font-size: 30px;
+}
+
+.result {
+  font-size: 20px;
+  color: #fff;
+}
+
+.gatchas {
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.gatcha {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  cursor: pointer;
+
+}
+
+.gatcha:hover {
+  transform: scale(1.1);
+}
