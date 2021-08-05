@@ -33,6 +33,107 @@ export const $ = ({ selector, parent = document }) =>  parent.querySelector(sele
 const $purchaseForm = $({ selector: '[data-component = "purchase-form"]', parent: $el })
 ```
 
+## ✨ 이벤트 위임 활용하기 + 장애물 처리하기
+
+> [이벤트 위임](https://ko.javascript.info/event-delegation)
+
+- 이벤트 위임은 비슷한 방식으로 여러 요소를 다뤄야 할 때 사용할 수 있다. 성능과 유지보수에 좋다.
+- 이벤트 위임을 사용하면 요소마다 직접 핸들러를 할당하지 않고, 요소의 공통 조상에 이벤트 핸들러를 단 하나만 할당해도 여러 하위 요소를 한꺼번에 다룰 수 있다.
+
+아래와 같은 화면에서 close버튼과 reset버튼에 클릭이벤트를 주고자 한다.
+
+```html
+// modal components: close 버튼, reset 버튼
+<div class="modal">
+  <button type="button" class="modal-close" data-action="close-modal">
+    <svg viewbox="0 0 40 40">
+      <path class="close-x" d="M 10,10 L 30,30 M 30,10 L 10,30" />
+    </svg>
+  </button>
+
+  // ...
+  <button
+    type="button"
+    class="btn btn-cyan reset-btn"
+    data-action="reset-lotto"
+  >
+    다시 시작하기
+  </button>
+</div>
+```
+
+### element.closest(selector) 활용하기
+
+element.closest(selector) 메서드는 element의 상위 요소 중 selector와 일치하는 가장 근접한 조상 요소를 반환한다. 이벤트가 발생한 요소부터 시작해 위로 올라가며 가장 가까운 selector 요소를 찾는다.
+
+```js
+// ...
+$el.addEventListener("click", e => {
+  if (e.target.closest(".modal-close")) {
+    onCloseModalClick();
+    console.log("close");
+    return;
+  }
+
+  if (e.target.closest(".reset-btn")) {
+    console.log("restart");
+    return;
+  }
+}
+
+// ...
+```
+
+### dataset 활용하기
+
+클릭 이벤트핸들러를 걸어줄 버튼의 html에 dataset을 추가해준다.
+여기서는 각 버튼에 `data-action="close-modal"`, `data-action="reset-lotto"`를 추가해준다.
+
+```js
+$el.addEventListener("click", e => {
+  switch (e.target.dataset.action) {
+    case "close-modal":
+      return console.log("close");
+
+    case "reset-lotto":
+      return console.log("reset");
+  }
+}
+```
+
+#### 자식 태그의 이벤트 막기
+
+위와 같이 구현하면, close 버튼 내 `svg 태그`를 클릭할 경우 의도한 이벤트가 동작하지 않는다. 버튼 내 자식 태그들의 이벤트를 막아주어야 한다.
+버튼이 가진 자식 태그들의 이벤트를 막기 위해서는 JS로 처리하는 방법과, CSS로 처리하는 방법이 있다. 여기서는 CSS로 처리해보자.
+
+```js
+.close-modal > svg {
+  pointer-events: none;
+}
+```
+
+자식 태그에게 CSS `pointer-events` 속성을 none으로 주어서 이벤트 자체를 막고, 해당 포인터를 감싸고 있는 부모 태그의 이벤트를 받도록 만들 수 있다.
+
+#### event.path 또는 event.composedPath
+
+> [MDN: event.composedPath](https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath)
+
+`event.path`를 콘솔에 찍어보면, 해당 이벤트가 발생했을 때 이벤트가 호출된 경로를 알 수 있다.
+
+자식 태그의 이벤트를 막지 않은 경우, svg에서도 클릭이벤트가 발생하는 반면, 자식 태그의 이벤트를 막으면 button에서부터 이벤트가 생성됨을 확인할 수 있다.
+![](https://images.velog.io/images/sunaaank/post/2486b14d-2962-426b-9bcf-f0147a161863/image.png)
+
+![](https://images.velog.io/images/sunaaank/post/3c6ed474-d289-404b-a90f-7ded5e13d550/image.png)
+
+#### event.path.find()
+
+참고로 e.path.find() 함수를 통해서 className 중 close-modal이 있는 지를 확인하는 방법도 있다.
+
+````js
+const clickedBtn = event.path.find((item) => item.className === "close-modal");
+  if (clickedBtn) alert("Btn clicked!");
+
+
 ## 새로 사용해본 JS 내장함수
 
 > - [MDN: FormData](https://developer.mozilla.org/ko/docs/Web/API/FormData)
