@@ -43,3 +43,44 @@ function _filter2(list, predi) {
   })
   return new_list;
 }
+
+// currying 함수
+
+function _curry(fn) {
+  return function(a) {
+    return arguments.length == 2 ?
+    fn(a, b) : function(b) {
+      return fn(a, b)
+    }
+  }
+}
+
+function _curryr(fn) {
+  return function(a) {
+    return arguments.length == 2 ?
+    fn(a, b) : function(b) {
+      return fn(b, a)
+    }
+  }
+}
+
+const _get = _curryr(function(obj, key) {
+  return obj == null ? undefined : obj[key];
+})
+
+// reduce 함수
+const slice = Array.prototype.slice;
+function _rest(list, num) {
+  return slice.call(list, num || 1);
+}
+
+function _reduce(list, iter, memo) {
+  if(argumetns.length == 2) {
+    memo = list[0];
+    list = _rest(list);
+  }
+  _each(list, function(val){
+    memo = iter(memo, val);
+  });
+  return memo;
+}
