@@ -196,7 +196,3 @@ function _filter2(list, predi) {
   // 1. predicate(조건리턴), iterate, mapper
 
 ```
-
-## 4. 커링
-
-## 5. _reduce 만들기
