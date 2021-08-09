@@ -1,3 +1,4 @@
+// 🎨 each 함수
 function _each(list, iter) {
   for (let i = 0; i < list.length; i++) {
     iter(list[i]);
@@ -6,7 +7,7 @@ function _each(list, iter) {
   return list;
 }
 
-// each를 사용한 리팩토링
+// 🐧 each를 사용한 리팩토링
 
 function _map1(list, mapper) {
   const new_list = [];
@@ -17,6 +18,7 @@ function _map1(list, mapper) {
     return new_list;
 }
 
+// 🎨 map 함수
 function _map2(list, mapper) {
   const new_list = [];
   _each(list, function(val) {
@@ -36,6 +38,8 @@ function _filter1(list, predi) {
   return new_list;
 }
 
+
+// 🎨 filter 함수
 function _filter2(list, predi) {
   const new_list = [];
   _each(list, function(val) {
@@ -45,7 +49,7 @@ function _filter2(list, predi) {
 }
 
 // currying 함수
-
+// 🎨 curry 함수
 function _curry(fn) {
   return function(a) {
     return arguments.length == 2 ?
@@ -55,6 +59,8 @@ function _curry(fn) {
   }
 }
 
+
+// 🎨 curryr 함수
 function _curryr(fn) {
   return function(a) {
     return arguments.length == 2 ?
@@ -64,16 +70,32 @@ function _curryr(fn) {
   }
 }
 
+
+// 🎨 get 함수
 const _get = _curryr(function(obj, key) {
   return obj == null ? undefined : obj[key];
 })
 
-// reduce 함수
+
+// 🐧 _get 함수를 사용한 리팩토링
+_map(
+  _filter(users, function(user) { return user.age >= 30; }),
+  _get("name")
+)
+
+_map(
+  _filter(users, function(user) { return user.age < 30; }),
+  _get("age"))
+
+
+// 🎨 rest 함수
 const slice = Array.prototype.slice;
 function _rest(list, num) {
   return slice.call(list, num || 1);
 }
 
+
+// 🎨 reduce 함수
 function _reduce(list, iter, memo) {
   if(argumetns.length == 2) {
     memo = list[0];
@@ -84,3 +106,79 @@ function _reduce(list, iter, memo) {
   });
   return memo;
 }
+
+
+// 🎨 pipe 함수
+function _pipe() {
+  const fns = arguments;
+  return function(arg) {
+    return _reduce(fns, function(arg, fn) {
+      return fn(arg);
+    }, arg)
+  }
+}
+
+
+// 🎨 go 함수
+function _go(arg) {
+  const fns = _rest(arguments);
+  return _pipe.apply(null, fns)(arg);
+}
+
+
+// 🐧 go 함수를 사용한 리팩토링
+_go(users,
+  function(users) {
+    return _filter(users, function(user) {
+      return user.age >= 30;
+    });
+  },
+  function(users) {
+    return _map(users, _get("name"));
+  },
+console.log);
+
+_go(users,
+  function(users) {
+    return _filter(users, function(user) {
+      return user.age < 30;
+    });
+  },
+  function(users) {
+    return _map(users, _get("age"));
+  },
+console.log);
+
+
+// 🎨 curryr 적용한 mapr, filterr 함수
+const _mapr = _curryr(_map)
+const _filterr = _curryr(_filter)
+
+
+// 🐧 curryr 적용한 이전 코드 리팩토링
+_go(users,
+  _filterr(function(user) {
+      return user.age >= 30;
+    }),
+  _mapr(_get("name"))
+  ,
+console.log);
+
+_go(users,
+  _filterr(function(user) {
+      return user.age < 30;
+    }),
+  _mapr(_get("age")),
+console.log);
+
+
+// 🐧 화살표 함수 간단히
+_go(users,
+  _filterr(user => user.age >= 30),
+  _mapr(_get("name")),
+console.log);
+
+_go(users,
+  _filterr(user => user.age < 30),
+  _mapr(_get("age")),
+console.log);
