@@ -182,3 +182,35 @@ _go(users,
   _filterr(user => user.age < 30),
   _mapr(_get("age")),
 console.log);
+
+// 🐧 each 함수 리팩토링_null값 오류 방지
+const _length = _get("length")
+
+function _each(list, iter) {
+  for (let i = 0; i < _length(list); i++) {
+    iter(list[i]);
+  }
+
+  return list;
+}
+
+// 🎨 _is_object 함수
+function _is_object(obj) {
+  return typeof obj == "object" && !!obj;
+}
+
+// 🎨 keys 함수
+function _keys(obj) {
+  return _is_object(obj) ? Object.keys(obj) : [];
+}
+
+// 🐧 each 함수 리팩토링_list인자로 array가 들어오든 key:value가 들어오든 잘 동작하도록
+
+function _each(list, iter) {
+  const keys = _keys(list);
+  for (let i = 0, len = keys.length; i < len; i++) {
+    iter(list[keys[i]]);
+  }
+
+  return list;
+}
