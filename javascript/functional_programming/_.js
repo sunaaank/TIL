@@ -246,3 +246,26 @@ _pluck(users, 'age') // [25, 35 ...]
 function _pluck2(data, key) {
   return _map(data, _get(key))
 }
+
+
+// 🎨 reject 함수
+function _reject(data, predi) {
+  return _filter(data, function(val) {
+    return !predi(val);
+  })
+}
+
+// 🎨 negate 함수
+function _negate(func) {
+  return function(val) {
+    return !func(val)
+  }
+}
+
+// 🐧 reject 함수에 negate 함수 적용하여 리팩토링
+function _reject(data, predi) {
+  return _filter(data, _negate(predi))
+}
+
+// 🎨 compact 함수
+const _compact = _filter(_identity)
