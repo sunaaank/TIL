@@ -269,3 +269,32 @@ function _reject(data, predi) {
 
 // 🎨 compact 함수
 const _compact = _filter(_identity)
+
+
+
+// 🎨 find 함수
+const _findr = _curryr(function(list, predi) {
+  const keys = _keys(list)
+  for (let i = 0, len = keys.length; i<len; i++) {
+    const val = list[keys[i]]
+    if(predi(val)) return val;
+  }
+})
+
+// 🎨 find_index 함수
+const _find_index_r = _curryr(function _find_index(list, predi) {
+  const keys = _keys(list)
+  for (let i = 0, len = keys.length; i<len; i++ ) {
+    if(predi(list[keys[i]])) return i;
+  }
+})
+
+// 🎨 some 함수
+function _some(data, predi) {
+  return _find_index_r(data, predi || _identity) != -1;
+}
+
+// 🎨 every 함수
+function _every(data, predi) {
+  return _find_index_r(data, _negate(predi || _identity)) == -1;
+}
