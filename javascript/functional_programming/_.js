@@ -214,3 +214,35 @@ function _each(list, iter) {
 
   return list;
 }
+
+// 🎨 values 함수
+function _values(data) {
+  return _map(data, function(val) { return val })
+}
+
+// 🐧 identity 함수를 만들면 위의 함수를 간단히 작성할 수 있음
+
+function _identity(val) {
+  return val;
+}
+
+function _values2(data) {
+  return _map(data, _identity)
+}
+
+
+// 🎨 pluck 함수
+// - 특정 key로 값을 꺼내 수집하는 함수
+function _pluck(data, key) {
+  return _map(data, function(obj) {
+    return obj[key]
+  })
+}
+
+_pluck(users, 'age') // [25, 35 ...]
+
+
+// 🐧 get 함수를 사용해 리팩토링
+function _pluck2(data, key) {
+  return _map(data, _get(key))
+}
