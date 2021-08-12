@@ -21,8 +21,8 @@ function _map1(list, mapper) {
 // 🎨 map 함수
 function _map2(list, mapper) {
   const new_list = [];
-  _each(list, function(val) {
-    new_list.push(mapper(val));
+  _each(list, function(val, key) {
+    new_list.push(mapper(val, key));
   });
   return new_list;
 }
@@ -209,7 +209,7 @@ function _keys(obj) {
 function _each(list, iter) {
   const keys = _keys(list);
   for (let i = 0, len = keys.length; i < len; i++) {
-    iter(list[keys[i]]);
+    iter(list[keys[i]], keys[i]);
   }
 
   return list;
@@ -267,6 +267,11 @@ function _reject(data, predi) {
   return _filter(data, _negate(predi))
 }
 
+// 🐧 reject 함수에 curryr 적용하여 리팩토링
+const _reject_r = _curryr(function(data, predi) {
+  return _filter(data, _negate(predi))
+})
+
 // 🎨 compact 함수
 const _compact = _filter(_identity)
 
@@ -298,3 +303,67 @@ function _some(data, predi) {
 function _every(data, predi) {
   return _find_index_r(data, _negate(predi || _identity)) == -1;
 }
+
+
+// 🎨 min 함수
+function _min(data){
+  return _reduce(data, function(a, b){
+    return a < b ? a : b;
+  });
+}
+
+// 🎨 max 함수
+function _max(data){
+  return _reduce(data, function(a, b){
+    return a > b ? a : b;
+  });
+}
+
+
+// 🎨 min_by 함수
+function _min_by(data, iter){
+  return _reduce(data, function(a, b){
+    return iter(a) < iter(b) ? a : b;
+  });
+}
+
+
+// 🎨 max_by 함수
+function _max_by(data, iter){
+  return _reduce(data, function(a, b){
+    return iter(a) > iter(b) ? a : b;
+  });
+}
+
+
+// 🎨 reject_r 함수
+const _reject_r = _curryr(function(data, predi) {
+  return _filter(data, _negate(predi))
+})
+
+
+// 🎨 group_by 함수를 위한 push 함수
+function _push(obj, key, val) {
+  (obj[key] = obj[key] || []).push(val);
+  return obj
+}
+
+// 🎨 group_by 함수
+const _group_by = _curryr(function(data, iter){
+  return _reduce(data, function(grouped, val) {
+    return _push(grouped, iter(val), val)
+  }, {})
+})
+
+// 🎨 count_by 함수를 위한 inc 함수
+const _inc = function(conut, key) {
+  count[key] ? count[key]++ : count[key] = 1
+  return count
+}
+
+// 🎨 count_by 함수
+const _count_by = _curryr(function(data, iter) {
+  return _reduce(data, function(count, val) {
+    return _inc(count, iter(val))
+  }, {})
+})
